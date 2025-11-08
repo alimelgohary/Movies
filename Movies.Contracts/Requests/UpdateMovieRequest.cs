@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Movies.Contracts.Requests
 {
-    internal class UpdateMovieRequest
+    public class UpdateMovieRequest
     {
+        public required Guid Id { get; set; }
+        public required string Title { get; set; }
+        public required string Writer { get; set; }
+        public required int PublicationYear { get; set; }
+        public required IEnumerable<string> Genres { get; set; } = Enumerable.Empty<string>();
     }
 }

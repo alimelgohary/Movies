@@ -9,10 +9,10 @@ namespace Movies.Application.Repositories
             new Movie { Id = Guid.NewGuid(), Title = "The Matrix", Writer = "The Wachowskis", PublicationYear = 1999, Genres = new List<string> { "Sci-Fi", "Action" } },
             new Movie { Id = Guid.NewGuid(), Title = "Interstellar", Writer = "Christopher Nolan", PublicationYear = 2014, Genres = new List<string> { "Sci-Fi", "Drama" } }
         };
-        public Task AddMovieAsync(Movie movie)
+        public Task<Movie> AddMovieAsync(Movie movie)
         {
             _movies.Add(movie);
-            return Task.CompletedTask;
+            return Task.FromResult(movie);
         }
 
         public Task<IEnumerable<Movie>> GetAllMoviesAsync()
@@ -25,7 +25,7 @@ namespace Movies.Application.Repositories
             return Task.FromResult(_movies.FirstOrDefault(m => m.Id == id));
         }
 
-        public Task UpdateMovieAsync(Movie movie, Guid id)
+        public Task<Movie> UpdateMovieAsync(Movie movie, Guid id)
         {
             if (id != movie.Id)
             {
@@ -37,7 +37,7 @@ namespace Movies.Application.Repositories
                 throw new ArgumentException("Movie not found");
             }
             _movies[existingMovieIndex] = movie;
-            return Task.CompletedTask;
+            return Task.FromResult(movie);
         }
         public Task DeleteMovieByIdAsync(Guid id)
         {
