@@ -2,15 +2,15 @@
 {
     public static class ApiEndpoints
     {
-        private const string Base = "api";
+        private const string BaseApi = "api";
         public static class Movies
         {
-            private const string Controller = "movies";
-            public const string Create = $"{Base}/{Controller}";
-            public const string GetAll = $"{Base}/{Controller}";
-            public const string GetById = $"{Base}/{Controller}/{{id:guid}}";
-            public const string Update = $"{Base}/{Controller}/{{id:guid}}";
-            public const string Delete = $"{Base}/{Controller}/{{id:guid}}";
+            private const string Base = $"{BaseApi}/movies";
+            public const string Create = $"{Base}";
+            public const string GetAll = $"{Base}";
+            public const string GetById = $"{Base}/{{id:guid}}";
+            public const string Update = $"{Base}/{{id:guid}}";
+            public const string Delete = $"{Base}/{{id:guid}}";
         }
     }
 }
