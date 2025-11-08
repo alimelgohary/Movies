@@ -5,6 +5,13 @@ namespace Movies.Api.Mapping
 {
     public static class MovieMapping
     {
+        public static MoviesResponse ToMoviesResponse(this IEnumerable<Movie> movie)
+        {
+            return new MoviesResponse
+            {
+                Items = movie.Select(m => m.ToMovieResponse())
+            };
+        }
         public static MovieResponse ToMovieResponse(this Movie movie)
         {
             return new MovieResponse
