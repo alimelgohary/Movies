@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movies.Api.Mapping;
+using Movies.Application.Models;
 using Movies.Application.Repositories;
 using Movies.Contracts;
 using Movies.Contracts.Requests;
@@ -17,36 +18,37 @@ namespace Movies.Api.Controllers
         [HttpGet(ApiEndpoints.Movies.GetAll)]
         public async Task<ActionResult<MovieResponse>> GetAllAsync()
         {
-            var movies = await _movieRepository.GetAllMoviesAsync();
+            IEnumerable<Movie> movies = await _movieRepository.GetAllMoviesAsync();
             return Ok(movies);
         }
         
         [HttpGet(ApiEndpoints.Movies.GetById)]
         public async Task<ActionResult<MovieResponse>> GetById([FromRoute] Guid id)
         {
-            var movie = await _movieRepository.GetMovieByIdAsync(id);
+            Movie movie = await _movieRepository.GetMovieByIdAsync(id);
             if(movie is null)
             {
                 return NotFound();
             }
-            var movieResponse = movie.ToMovieResponse();
+            MovieResponse movieResponse = movie.ToMovieResponse();
             return Ok(movieResponse);
         }
         [HttpPost(ApiEndpoints.Movies.Create)]
         public async Task<ActionResult<MovieResponse>> Create([FromBody] CreateMovieRequest createMovieRequest)
         {
-            var movie = createMovieRequest.ToMovie();
-            var res = await _movieRepository.AddMovieAsync(movie);
-            
-            return Ok(res.ToMovieResponse());
+            Movie movie = createMovieRequest.ToMovie();
+            Movie res = await _movieRepository.AddMovieAsync(movie);
+            MovieResponse response = res.ToMovieResponse();
+            return Ok(response);
         }
 
         [HttpPut(ApiEndpoints.Movies.Update)]
         public async Task<ActionResult<MovieResponse>> Update([FromRoute] Guid id, [FromBody] UpdateMovieRequest updateMovieRequest)
         {
-            var movie = updateMovieRequest.ToMovie();
-            var res = await _movieRepository.UpdateMovieAsync(movie, id);
-            return Ok(res.ToMovieResponse());
+            Movie movie = updateMovieRequest.ToMovie();
+            Movie res = await _movieRepository.UpdateMovieAsync(movie, id);
+            MovieResponse response = res.ToMovieResponse();
+            return Ok(response);
         }
 
         [HttpDelete(ApiEndpoints.Movies.Delete)]
