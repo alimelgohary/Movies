@@ -11,8 +11,8 @@ namespace Movies.Application.Repositories
     {
         public Task<IEnumerable<Movie>> GetAllMoviesAsync();
         public Task<Movie?> GetMovieByIdAsync(Guid id);
-        public Task AddMovieAsync(Movie movie);
-        public Task UpdateMovieAsync(Movie movie, Guid id);
+        public Task<Movie> AddMovieAsync(Movie movie);
+        public Task<Movie> UpdateMovieAsync(Movie movie, Guid id);
         public Task DeleteMovieByIdAsync(Guid id);
 
     }
