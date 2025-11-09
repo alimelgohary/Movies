@@ -14,6 +14,6 @@ namespace Movies.Application.Repositories
         public Task<Movie> AddMovieAsync(Movie movie);
         public Task<Movie> UpdateMovieAsync(Movie movie, Guid id);
         public Task DeleteMovieByIdAsync(Guid id);
-
+        public Task<Movie?> GetMovieBySlugAsync(string slug);
     }
 }

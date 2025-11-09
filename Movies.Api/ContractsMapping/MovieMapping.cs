@@ -19,6 +19,7 @@ namespace Movies.Api.Mapping
                 MovieId = movie.Id,
                 MovieTitle = movie.Title,
                 MovieWriter = movie.Writer,
+                MovieSlug = movie.Slug,
                 MoviePublicationYear = movie.PublicationYear,
                 MovieGenres = movie.Genres.ToList()
             };
