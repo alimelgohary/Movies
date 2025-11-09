@@ -21,18 +21,18 @@ namespace Movies.Api.Mapping
                 MovieWriter = movie.Writer,
                 MovieSlug = movie.Slug,
                 MoviePublicationYear = movie.PublicationYear,
-                MovieGenres = movie.Genres.ToList()
+                MovieGenres = movie.Genres.Select(x => x.Name).ToList()
             };
         }
-        public static Movie ToMovie(this CreateMovieRequest movie)
+        public static Movie ToMovie(this CreateMovieRequest request)
         {
             return new Movie
             {
                 Id = Guid.NewGuid(),
-                Title = movie.Title,
-                Writer = movie.Writer,
-                PublicationYear = movie.PublicationYear,
-                Genres = movie.Genres.ToList()
+                Title = request.Title,
+                Writer = request.Writer,
+                PublicationYear = request.PublicationYear,
+                Genres = request.Genres.Select(x => new Genre { Id = x }).ToList()
             };
         }
         public static Movie ToMovie(this UpdateMovieRequest movie)
@@ -43,7 +43,7 @@ namespace Movies.Api.Mapping
                 Title = movie.Title,
                 Writer = movie.Writer,
                 PublicationYear = movie.PublicationYear,
-                Genres = movie.Genres.ToList()
+                Genres = movie.Genres.Select(x => new Genre { Id = x }).ToList()
             };
         }
     }

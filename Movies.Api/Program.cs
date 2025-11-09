@@ -9,7 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplicationServices();
-
+builder.Services.AddDatabase(builder.Configuration.GetConnectionString("DefaultConnection")!);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
