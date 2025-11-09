@@ -18,6 +18,8 @@ namespace Movies.Application.Database.Configuration
             builder.Property(m => m.Name)
                    .HasMaxLength(200);
             builder.HasIndex(m => m.Name).IsUnique();
+
+            builder.ToTable("Genres");
         }
     }
 }
