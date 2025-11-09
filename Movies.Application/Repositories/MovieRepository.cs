@@ -4,7 +4,7 @@ namespace Movies.Application.Repositories
 {
     public class MovieRepository : IMovieRepository
     {
-        public List<Movie> _movies = new List<Movie>() {
+        List<Movie> _movies = new List<Movie>() {
             new Movie { Id = Guid.NewGuid(), Title = "Inception", Writer = "Christopher Nolan", PublicationYear = 2010, Genres = new List<string> { "Sci-Fi", "Thriller" } },
             new Movie { Id = Guid.NewGuid(), Title = "The Matrix", Writer = "The Wachowskis", PublicationYear = 1999, Genres = new List<string> { "Sci-Fi", "Action" } },
             new Movie { Id = Guid.NewGuid(), Title = "Interstellar", Writer = "Christopher Nolan", PublicationYear = 2014, Genres = new List<string> { "Sci-Fi", "Drama" } }
