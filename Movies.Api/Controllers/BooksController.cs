@@ -23,10 +23,13 @@ namespace Movies.Api.Controllers
             return Ok(response);
         }
         
-        [HttpGet(ApiEndpoints.Movies.GetById)]
-        public async Task<ActionResult<MovieResponse>> GetById([FromRoute] Guid id)
+        [HttpGet(ApiEndpoints.Movies.Get)]
+        public async Task<ActionResult<MovieResponse>> Get([FromRoute] string idOrSlug)
         {
-            Movie movie = await _movieRepository.GetMovieByIdAsync(id);
+            var movie = Guid.TryParse(idOrSlug, out Guid id) 
+                ? await _movieRepository.GetMovieByIdAsync(id) 
+                : await _movieRepository.GetMovieBySlugAsync(idOrSlug);
+
             if(movie is null)
             {
                 return NotFound();
