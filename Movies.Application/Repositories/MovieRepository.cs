@@ -14,7 +14,7 @@ namespace Movies.Application.Repositories
         public async Task<Movie?> AddMovieAsync(Movie movie)
         {
             var genreIds = movie.Genres.Select(g => g.Id).ToList();
-            var existingGenres = await _context.Genre
+            var existingGenres = await _context.Genres
                 .Where(g => genreIds.Contains(g.Id)).ToListAsync();
 
             if (existingGenres.Count != genreIds.Count)
@@ -63,7 +63,7 @@ namespace Movies.Application.Repositories
                 return null;
 
             var genreIds = movie.Genres.Select(g => g.Id).ToList();
-            var existingGenres = await _context.Genre
+            var existingGenres = await _context.Genres
                 .Where(g => genreIds.Contains(g.Id)).ToListAsync();
 
             if (existingGenres.Count != genreIds.Count)
