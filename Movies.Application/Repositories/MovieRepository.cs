@@ -26,12 +26,12 @@ namespace Movies.Application.Repositories
             return movie;
         }
 
-        public async Task<IEnumerable<Movie>> GetAllMoviesAsync()
+        public async Task<IEnumerable<Movie>> GetAllMoviesAsync(CancellationToken token = default)
         {
             return await _context.Movies
                 .AsNoTrackingWithIdentityResolution()
                 .Include(x => x.Genres)
-                .ToListAsync();
+                .ToListAsync(cancellationToken: token);
         }
 
         public async Task<Movie?> GetMovieByIdAsync(Guid id)

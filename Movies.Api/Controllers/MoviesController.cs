@@ -16,9 +16,9 @@ namespace Movies.Api.Controllers
             _movieRepository = movieRepository;
         }
         [HttpGet(ApiEndpoints.Movies.GetAll)]
-        public async Task<ActionResult<MovieResponse>> GetAllAsync()
+        public async Task<ActionResult<MovieResponse>> GetAllAsync(CancellationToken token)
         {
-            IEnumerable<Movie> movies = await _movieRepository.GetAllMoviesAsync();
+            IEnumerable<Movie> movies = await _movieRepository.GetAllMoviesAsync(token);
             MoviesResponse response = movies.ToMoviesResponse();
             return Ok(response);
         }

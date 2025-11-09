@@ -9,7 +9,7 @@ namespace Movies.Application.Repositories
 {
     public interface IMovieRepository
     {
-        public Task<IEnumerable<Movie>> GetAllMoviesAsync();
+        public Task<IEnumerable<Movie>> GetAllMoviesAsync(CancellationToken token = default);
         public Task<Movie?> GetMovieByIdAsync(Guid id);
         public Task<Movie?> AddMovieAsync(Movie movie);
         public Task<Movie?> UpdateMovieAsync(Movie movie, Guid id);
