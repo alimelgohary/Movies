@@ -8,10 +8,10 @@ using Movies.Contracts.Requests;
 namespace Movies.Api.Controllers
 {
     [ApiController]
-    public class BooksController : ControllerBase
+    public class MoviesController : ControllerBase
     {
         private readonly IMovieRepository _movieRepository;
-        public BooksController(IMovieRepository movieRepository)
+        public MoviesController(IMovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
         }
