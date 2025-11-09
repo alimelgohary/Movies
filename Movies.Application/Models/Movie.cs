@@ -10,15 +10,21 @@ namespace Movies.Application.Models
         public string Title { get; set; }
         public string Writer { get; set; }
         public int PublicationYear { get; set; }
-        public IEnumerable<string> Genres{ get; set; } = Enumerable.Empty<string>();
-        public string Slug => GenerateSlug();
-
+        public ICollection<Genre> Genres { get; set; }
+        public string Slug
+        {
+            get
+            {
+                return GenerateSlug();
+            }
+            set {}
+        }
         private string GenerateSlug()
         {
             // var withoutSpecialChar = Regex.Replace(Title, "[^0-9A-Za-z _-]", string.Empty);
             
             var withoutSpecialChar = SlugRegex().Replace(Title, string.Empty);
-            return withoutSpecialChar.ToLower().Replace(" ", "-");
+            return withoutSpecialChar.ToLower().Replace(" ", "-") + "-" + PublicationYear;
             
         }
         // Partial method with GeneratedRegex attribute for better performance

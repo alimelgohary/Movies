@@ -41,7 +41,11 @@ namespace Movies.Api.Controllers
         public async Task<ActionResult<MovieResponse>> Create([FromBody] CreateMovieRequest createMovieRequest)
         {
             Movie movie = createMovieRequest.ToMovie();
-            Movie res = await _movieRepository.AddMovieAsync(movie);
+            Movie? res = await _movieRepository.AddMovieAsync(movie);
+            if (res is null)
+            {
+                return BadRequest("One or more genres are invalid.");
+            }
             MovieResponse response = res.ToMovieResponse();
             return Ok(response);
         }
@@ -50,7 +54,10 @@ namespace Movies.Api.Controllers
         public async Task<ActionResult<MovieResponse>> Update([FromRoute] Guid id, [FromBody] UpdateMovieRequest updateMovieRequest)
         {
             Movie movie = updateMovieRequest.ToMovie();
-            Movie res = await _movieRepository.UpdateMovieAsync(movie, id);
+            Movie? res = await _movieRepository.UpdateMovieAsync(movie, id);
+            if(res is null)
+                return BadRequest("One or more genres are invalid.");
+
             MovieResponse response = res.ToMovieResponse();
             return Ok(response);
         }
@@ -58,7 +65,9 @@ namespace Movies.Api.Controllers
         [HttpDelete(ApiEndpoints.Movies.Delete)]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            await _movieRepository.DeleteMovieByIdAsync(id);
+            var result = await _movieRepository.DeleteMovieByIdAsync(id);
+            if(!result)
+                return NotFound();
             return NoContent();
         }
     }
